@@ -1,0 +1,546 @@
+\documentclass[11pt]{amsart}
+\usepackage{amsmath,amssymb,amsthm}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\numberwithin{equation}{section}
+\newcommand{\K}{\mathcal K}
+\newcommand{\one}{\mathbf 1}
+\newcommand{\E}{\mathcal E}
+\DeclareMathOperator{\vol}{vol}
+
+\title[Threshold graphs maximizing Kemeny's constant]{Threshold graphs maximizing Kemeny's constant}
+% Insert the final author information here, one block per author.
+% \author{Author name}
+% \address{Department, institution, and postal address}
+% \email{Email address}
+\subjclass[2020]{Primary 05C81; Secondary 05C50, 60J10}
+\keywords{Kemeny's constant, threshold graph, pineapple graph, multiplicative degree-Kirchhoff index}
+\date{}
+
+\begin{document}
+\begin{abstract}
+We prove a conjecture of Breen et al. on Kemeny's constant for the
+simple random walk on a connected threshold graph. At each order $n$,
+every maximizer is a pineapple, that is, a clique with all remaining
+vertices attached as leaves to one clique vertex. The maximizer is
+unique up to isomorphism except at $n=21$. For $n\ge247$ its clique
+has size $1+\lfloor\sqrt{2n-9}\rfloor$, and the maximum is
+$n+\sqrt{n/2}-7/2+O(n^{-1/2})$ as $n\to\infty$.
+At fixed order we also show that the pineapples are
+precisely the vertices of the upper convex hull of the points
+representing the edge count and the multiplicative degree-Kirchhoff
+index. The proof uses the nesting of the neighborhoods outside a
+maximum clique. We also characterize the sequences of threshold
+graphs for which Kemeny's constant is $n+(1+o(1))\sqrt{n/2}$.
+\end{abstract}
+\maketitle
+
+\section{Introduction}\label{sec:intro}
+
+Let $G$ be a finite, simple, connected graph of order $n\ge2$ and
+size $m$. Consider the simple random walk on $G$. Write $d_v$ for the
+degree of $v$ and $H_y$ for the first hitting time of $y$, with $H_y=0$
+when the walk starts at $y$. Kemeny and Snell \cite{KS} showed that
+the mean $\K(G)=\sum_{y\in V(G)}d_y\mathbb E_x[H_y]/(2m)$ is
+independent of the starting vertex $x$. Thus $\K(G)$ is the mean time
+to hit a vertex drawn from the stationary distribution. If
+$0=\nu_1<\nu_2\le\cdots\le\nu_n$ are the eigenvalues of the
+normalized Laplacian $I-D^{-1/2}AD^{-1/2}$, where $A$ and $D$ are the
+adjacency and degree matrices of $G$, then
+$\K(G)=\sum_{j=2}^n\nu_j^{-1}$.
+
+The form of an extremal graph depends on the class under
+consideration. For instance, on trees of fixed order Kemeny's constant
+is an increasing affine function of the Wiener index, the sum of the
+distances over unordered pairs of vertices \cite{JKS}. We study
+\emph{threshold graphs}, which are obtained from a single vertex by
+successively adding either an isolated vertex or a vertex adjacent to
+all earlier vertices \cite{MP}. Breen et al.\ \cite{Breen} expressed
+Kemeny's constant in terms of this construction and proved that
+$\K(G)<2n-3$ and $\K(G)<n-1+\tfrac32\sqrt m$ for connected
+threshold graphs of order $n\ge3$. Their computations led to a
+conjecture about the graphs that maximize $\K$ at each order.
+
+For $2\le k\le n$, let $P_{n,k}$ be the graph obtained from a
+$k$-clique by attaching $n-k$ leaves to a single clique vertex. We call
+$P_{n,k}$ a \emph{pineapple}, including the star $P_{n,2}$ and the
+complete graph $P_{n,n}$. In citing numbered statements of Breen et al.,
+we use the numbering of the preprint listed in \cite{Breen}.
+
+\begin{conjecture}[Breen et al.\ {\cite[Conjecture 3.13]{Breen}}]\label{conj:pineapple}
+Among the connected threshold graphs of a given order, every graph
+with maximum Kemeny's constant is a pineapple.
+\end{conjecture}
+
+We prove Conjecture~\ref{conj:pineapple} by comparing graphs at a
+prescribed edge count. The quantity $2m\K(G)$ is the multiplicative
+degree-Kirchhoff index of $G$. It equals
+$\sum_{\{u,v\}}d_ud_v R(u,v)$, where the sum is over unordered
+pairs of distinct vertices and $R(u,v)$ is their effective resistance
+when each edge has unit resistance \cite{CZ}. For fixed $n$, abbreviate
+$P_{n,t}$ to $P_t$ and write $m_t=\binom t2+n-t$ for its edge count.
+
+\begin{theorem}\label{th:comparison}
+Let $G$ be a connected threshold graph of order $n\ge3$ and size $m$.
+Choose $2\le t<n$ such that $m_t\le m\le m_{t+1}$, and set
+$\lambda=(m-m_t)/(m_{t+1}-m_t)$. Then
+\[
+ m\K(G)\le (1-\lambda)m_t\K(P_t)
+               +\lambda m_{t+1}\K(P_{t+1}).
+\]
+Equality holds if and only if $G$ is isomorphic to $P_t$ or $P_{t+1}$.
+In particular, for each $2\le t\le n$, the graph $P_t$ is the unique
+maximizer up to isomorphism at order $n$ and size $m_t$.
+\end{theorem}
+
+Join consecutive pineapple points in the $(m,2m\K)$-plane.
+The slopes of the resulting segments strictly decrease, and
+Theorem~\ref{th:comparison} identifies their union as the upper boundary
+of the convex hull of the points $(m,2m\K(G))$. Dividing the
+inequality by $m$ bounds $\K(G)$ by a weighted mean of the two
+pineapple values. It therefore suffices to determine which pineapple
+maximizes $\K$.
+
+\begin{theorem}\label{th:main}
+Every connected threshold graph maximizing Kemeny's constant at a fixed
+order $n\ge2$ is a pineapple. The maximizer is unique up to isomorphism
+except at $n=21$, where the maximizing graphs are $P_{21,6}$ and
+$P_{21,7}$. For $n\ge247$ the extremal clique size is
+$1+\lfloor\sqrt{2n-9}\rfloor$. As $n\to\infty$, the maximum is
+$n+\sqrt{n/2}-7/2+O(n^{-1/2})$.
+\end{theorem}
+
+Breen et al.\ also conjectured that the maximum is
+$n+\sqrt n/2+O(1)$ and proposed two candidates for the length $r$ of
+the first block of ones in the construction code
+$0\mathbf 1^r\mathbf 0^{n-r-2}1$
+\cite[Proposition 3.15 and Conjecture 3.16]{Breen}.
+Here $0$ denotes an isolated addition and $1$ a dominating addition,
+with the initial vertex encoded by $0$. The clique has size $r+2$.
+Theorem~\ref{th:main} gives the coefficient $1/\sqrt2$ of $\sqrt n$.
+At $n=21$ the optimal values are $r=4,5$, both giving
+$\K=21$. The two candidates $r=6,7$ in the preprint give
+$3429/164$ and $1495/72$, respectively.
+
+The proof uses the nested neighborhoods outside a maximum clique.
+Section~\ref{sec:averaging} expresses $\K(G)$ in terms of their
+sizes and averages over a common level in the nesting. This reduces
+Theorem~\ref{th:comparison} to graphs with just two possible
+neighborhood sizes. In Section~\ref{sec:polygon} we compare each
+such graph with a chord joining two pineapple points.
+Section~\ref{sec:cliquesize} determines the optimal clique size at
+every order. Section~\ref{sec:stability} characterizes the graphs
+that attain the leading term of the excess $\K(G)-n$.
+
+\section{Averaging nested neighborhoods}\label{sec:averaging}
+
+\subsection{A formula in terms of neighborhood sizes}
+Fix a construction of a connected threshold graph $G$ of order $n\ge2$.
+The initial vertex and the dominating additions form a clique $C$.
+Number its vertices $1,\ldots,k$ in reverse order of addition, so
+that the initial vertex has label $k$. The remaining vertices form
+an independent set $I$. Each $i\in I$ is adjacent precisely to the
+clique vertices added after $i$. Its neighborhood is therefore an
+initial segment $[r_i]=\{1,\ldots,r_i\}$, where $1\le r_i\le k-1$.
+A clique meeting $I$ contains at most one vertex of $I$ and at most
+$k-1$ of its neighbors, so $k=\omega(G)$.
+
+Write $N=n-k$, $T=\sum_{i\in I}r_i$, and let
+$V=\vol(G)=2|E(G)|=k(k-1)+2T$. In the bipartite adjacency matrix
+with rows indexed by $I$ and columns by $C$, row $i$ has $r_i$
+initial ones. For $2\le j\le k$, let $N_j$ be the number of rows
+reaching column $j$, and let $A_j$ be the total length of the
+remaining rows. With $f(x)=2x(1-2x/V)$, write
+\[
+ N_j=|\{i:r_i\ge j\}|,\qquad A_j=\sum_{r_i<j}r_i,
+ \qquad w_j=\frac1{j(j-1)}.
+\]
+
+\begin{lemma}\label{lem:spectral}
+For a connected threshold graph $G$ with the preceding parameters,
+\begin{equation}\label{eq:formula}
+ \K(G)=n-1-\frac TV+
+ \sum_{j=2}^k\frac{w_j f(A_j)-1}{k+N_j}.
+\end{equation}
+\end{lemma}
+\begin{proof}
+For real-valued functions on $V(G)$ consider the energy form and
+the degree-weighted variance
+\begin{align*}
+ \E(g,h)&=\sum_{uv\in E(G)}(g(u)-g(v))(h(u)-h(v)),\\
+ \mathcal V(g)&=\sum_v d_vg(v)^2-\biggl(\sum_v d_v g(v)\biggr)^2/V .
+\end{align*}
+Both forms are invariant under the addition of constants. On the
+subspace of functions of degree-weighted mean zero, $\mathcal V$ is
+the squared norm for the inner product
+$\langle g,h\rangle_d=\sum_v d_vg(v)h(v)$. In an orthonormal
+eigenbasis of the random-walk Laplacian $I-D^{-1}A$ on that subspace,
+the matrices of $\E$ and $\mathcal V$ are
+$\operatorname{diag}(\nu_2,\ldots,\nu_n)$ and the identity.
+If $M$ and $B$ are the respective matrices in any other basis modulo
+constants, $M^{-1}B$ is similar to
+$\operatorname{diag}(\nu_2^{-1},\ldots,\nu_n^{-1})$. Taking the trace in an
+energy-orthogonal basis $(g_i)$ therefore gives
+$\K(G)=\sum_i\mathcal V(g_i)/\E(g_i,g_i)$.
+
+For each $i\in I$, take the indicator of $\{i\}$. On $C$, let
+$u_j=\sqrt{w_j}(\one_{[j-1]}-(j-1)e_j)$ for $2\le j\le k$, where
+$\one_{[j-1]}$ is the indicator of $[j-1]$ and $e_j$ is the $j$th
+coordinate vector. The $u_j$ form an orthonormal basis of the vectors
+in $\mathbb R^k$ with coordinate sum zero. Extend $u_j$ to a function
+$g_j$ on $G$ by setting $g_j(i)$ equal to the mean of $u_j$ on
+$[r_i]$. This mean is $\sqrt{w_j}$ if $r_i<j$ and zero otherwise.
+The indicators are mutually energy-orthogonal and are energy-orthogonal
+to every $g_j$ by the averaging property. The clique
+contributes $k\delta_{jh}$ to $\E(g_j,g_h)$. The edges at a vertex
+of degree $r$ in $I$ contribute $\delta_{jh}$ if $j,h\le r$ and
+zero otherwise, since a contrast with index greater than $r$ is
+constant on $[r]$. Thus $\E(g_j,g_h)=(k+N_j)\delta_{jh}$. These
+$n-1$ functions form the required basis.
+
+The indicator of $\{i\}$ contributes $1-r_i/V$ to the trace,
+so the combined contribution of the indicators is $N-T/V$. The clique
+vertex at position $t$ has degree $k-1+N_t$, where $N_1=N$. Using
+$\sum_{t<j}(N_t-N_j)=A_j$ and the extension values gives
+$\sum_v d_vg_j(v)=2\sqrt{w_j}A_j$ and
+$\sum_v d_vg_j(v)^2=k-1+N_j+2w_jA_j$. The variance identity
+now gives \eqref{eq:formula}.
+\end{proof}
+
+The following consequence will be used in the proof of
+Theorem~\ref{th:stability}.
+
+\begin{corollary}\label{cor:uniform}
+For every connected threshold graph of order $n\ge2$ and clique number
+$k\ge2$, we have $\K(G)\le n-1+\sqrt{(1-1/k)(N-T/k)/2}$.
+\end{corollary}
+\begin{proof}
+Put $Q_j=V-2A_j$. Then
+$Q_j=k(k-1)+2\sum_{r_i\ge j}r_i\le(k+N_j)^2$. Since
+$xy/(x+y)\le\sqrt{xy}/2$, taking $x=2A_j$ and $y=Q_j$ gives
+$f(A_j)/(k+N_j)\le\sqrt{A_j/2}$. Discarding the negative terms
+in \eqref{eq:formula} and applying Cauchy--Schwarz bounds
+$\K(G)-n+1$ by $(\sum_j w_j)^{1/2}(\sum_j w_jA_j/2)^{1/2}$.
+Now $\sum_{j=2}^k w_j=1-1/k$. A row of length $r$ contributes
+$r\sum_{j=r+1}^k w_j=1-r/k$ to $\sum_{j=2}^k w_jA_j$, so the
+latter sum is $N-T/k$.
+\end{proof}
+
+\subsection{A common neighborhood level}
+Assume $k\ge3$, and write $q=k-1$, $a=k-2$. For each integer $0\le s\le N$, let $H_s$ consist of the clique $C$ and an independent set
+of size $N$, with $s$ vertices adjacent to $[q]$ and the remaining
+$N-s$ adjacent to $[1]$. Thus $H_0=P_k$. For
+a graph $X$ of order $n$, put $Y(X)=\vol(X)(\K(X)-n+4)$.
+This change of ordinate subtracts the linear function $(n-4)\vol(X)$
+from the multiplicative degree-Kirchhoff index and preserves every
+comparison with a chord.
+
+Choose a common level $j$ uniformly from $2,\ldots,q$. Replace
+$[r_i]$ by $[q]$ if $r_i\ge j$ and by $[1]$ otherwise. The resulting
+graph is $H_{N_j}$, and the new degree of each $i\in I$ has mean $r_i$.
+
+\begin{lemma}[Common-level averaging]\label{lem:average}
+With the notation above,
+\[
+ \vol(G)=\frac1a\sum_{j=2}^q \vol(H_{N_j}),\qquad
+ Y(G)\le\frac1a\sum_{j=2}^q Y(H_{N_j}).
+\]
+Equality in the second relation holds precisely when all $r_i$ lie in
+$\{1,q\}$.
+\end{lemma}
+\begin{proof}
+Write $b_j=N_j$, $R_j=w_jA_j$ and $Q_j=V-2A_j$ for $2\le j\le q$.
+All sums in this proof are over indices in $\{2,\ldots,q\}$ unless
+otherwise indicated.
+Separating the $j=k$ term in \eqref{eq:formula} gives
+\begin{equation}\label{eq:affine}
+ Y(G)=B(T)+\sum_j\frac{2R_jQ_j-V}{k+b_j},\qquad
+ B(T)=3V-\frac{aT+V}{k}.
+\end{equation}
+Here $B$ is affine since $V=kq+2T$.
+
+Two counts of the row lengths give
+\[
+ Q_j=j(k+2b_j)+\sum_{\ell>j}(k+2b_\ell),\qquad
+ N-b_\ell=\ell R_\ell+\sum_{j<\ell}R_j.
+\]
+The first counts each row of length $r\ge j$ exactly $r$ times in
+$T-A_j$. In the second, a row of length $r<\ell$ contributes
+$r/(\ell-1)+r\sum_{j=r+1}^{\ell-1}w_j=1$, and rows of length at least $\ell$ contribute zero.
+Interchanging the two sums and using $b_j\ge b_\ell$ for $j<\ell$ gives
+\begin{align*}
+ \sum_j\frac{R_jQ_j}{k+b_j}
+ &=\sum_\ell(k+2b_\ell)\left(\frac{\ell R_\ell}{k+b_\ell}
+                   +\sum_{j<\ell}\frac{R_j}{k+b_j}\right)\\
+ &\le\sum_\ell\frac{(k+2b_\ell)(N-b_\ell)}{k+b_\ell}.
+\end{align*}
+For $H_s$ the columns $2,\ldots,q$ all have height $s$, so equality
+holds throughout.
+
+Let $p=a^{-1}\sum_j b_j=(T-N)/a$ and put $v_s=\vol(H_s)$.
+Since each row keeps its mean length, the mean of $T$, and hence the
+means of $V$ and $B(T)$, are preserved.
+Insert the last bound in \eqref{eq:affine} for $G$, and use equality
+there for each $H_{b_j}$. The terms involving $N-b_j$ cancel, leaving
+\[
+ \frac1a\sum_jY(H_{b_j})-Y(G)
+ \ge \sum_j\frac{V-v_{b_j}}{k+b_j}
+ =\frac{2a}{k+p}\sum_j\frac{(b_j-p)^2}{k+b_j}.
+\]
+The last equality uses $V-v_{b_j}=2a(p-b_j)$ and $\sum_j(p-b_j)=0$.
+If the heights $b_2,\ldots,b_q$ are not all equal, the right side is positive.
+Otherwise every row has length $1$ or $q$, so every outcome is $G$.
+\end{proof}
+
+\section{The upper convex hull}\label{sec:polygon}
+Set $V_t=2m_t=t^2-3t+2n$ and $\phi(t)=2nt-n-5+4n/t$.
+The value of Kemeny's constant on a pineapple is
+\begin{equation}\label{eq:pine}
+ \K(P_t)=n-4+\frac{\phi(t)}{V_t}
+         =n-4+\frac2t+\frac{(n-1)(2t-1)}{V_t}.
+\end{equation}
+This is \cite[Lemma 3.14]{Breen} with $r=t-2$. A resistance-distance
+derivation appears in \cite[Corollary 3.5]{HC}. Formula
+\eqref{eq:formula} gives the same expression by taking $r_i=1$ throughout.
+
+Let $F$ be the piecewise linear function joining the points
+$(V_t,\phi(t))$, $2\le t\le n$. Its slope between consecutive
+points is $n(t+2)/[t(t+1)]$, which decreases strictly. Thus $F$ is
+concave, with a vertex at every pineapple volume.
+For $k\ge3$, the graph $H_s$ has $T=N+as$ and
+$\vol(H_s)=V_k+2as$. For $2\le j\le k-1$, its parameters are
+$N_j=s$ and $A_j=N-s$, while $N_k=0$ and $A_k=T$.
+Substitution in \eqref{eq:affine} gives
+\begin{equation}\label{eq:line}
+ Y(H_s)=\chi(s)=\phi(k)+2as\,\tau(s),\qquad
+ \tau(s)=\frac{2n(k+1)+k(s+1)}{2k(k+s)} .
+\end{equation}
+
+For $1\le s\le N$ integral, denote the slope of the chord joining
+the pineapple points of clique sizes $k$ and $k+s$ by
+\[
+ S_k(s)=\frac{\phi(k+s)-\phi(k)}{V_{k+s}-V_k}
+       =\frac{2n}{2k+s-3}\left(1-\frac{2}{k(k+s)}\right).
+\]
+
+\begin{proof}[Proof of Theorem~\ref{th:comparison}]
+For each $s\ge1$, the volume of $H_s$ lies strictly between $V_k$
+and $V_{k+s}$, since $\vol(H_s)-V_k=2as$ and
+$V_{k+s}-\vol(H_s)=s(s+1)$. By \eqref{eq:line}, the slope from the
+point of $P_k$ to the point of $H_s$ is $\tau(s)$. The chord from
+$P_k$ to $P_{k+s}$ has larger slope, since
+\[
+ S_k(s)-\tau(s)=
+ \frac{(s+1)[2n(k-1)-k(2k+s-3)]}{2k(k+s)(2k+s-3)}>0 .
+\]
+Indeed $n\ge k+s$ and the bracket is at least $k+(k-2)s$.
+Consequently $Y(H_s)<F(\vol(H_s))$ for $s>0$, while $H_0=P_k$
+gives equality. A nonpineapple has $k\ge3$ and $N_2>0$.
+Lemma~\ref{lem:average} and concavity now give
+\[
+ Y(G)\le\frac1a\sum_{j=2}^q Y(H_{N_j})
+ <\frac1a\sum_{j=2}^q F(\vol(H_{N_j}))\le F(\vol(G)).
+\]
+Every pineapple attains its own vertex of $F$. Adding back the
+linear term $(n-4)V$ and dividing by two proves the theorem.
+\end{proof}
+
+We next keep both the order $n$ and the clique size $k\ge3$ fixed.
+Extend $\chi$ to the real interval $[0,N]$ by \eqref{eq:line}. The
+identity
+\[
+ \chi(s)=\phi(k)+as+
+ \frac{a[2n(k+1)-k(k-1)]}{k}\,\frac{s}{k+s}
+\]
+shows that $\chi$ is strictly concave when $N>0$. It also shows
+that $\tau(s)=(\chi(s)-\chi(0))/(2as)$ decreases strictly for $s>0$,
+with $\tau(0)$ given by \eqref{eq:line}, since
+$2n(k+1)-k(k-1)>0$.
+Let $\widehat\chi$ interpolate the integer values of $\chi$ linearly. Then
+Lemma~\ref{lem:average} and $\sum_{j=2}^q N_j=ap$ give
+\begin{equation}\label{eq:int}
+ Y(G)\le\widehat\chi(p)\le\chi(p),\qquad p=(T-N)/a.
+\end{equation}
+If $p$ is integral, $H_p$ is therefore the unique maximizer up to
+isomorphism at fixed order, clique size, and edge count, by the equality condition in Lemma~\ref{lem:average}.
+
+\begin{corollary}\label{cor:clique}
+Let $G$ be a connected threshold graph of order $n$ and clique number
+$k$ that is not a pineapple. Let $\ell$ be the least $t\in\{2,\ldots,n\}$
+such that $V_t\ge\vol(G)$. Then $\K(G)<\max\{\K(P_k),\K(P_\ell)\}$.
+If $k^2\ge2n$, then $\K(G)<\K(P_k)$.
+\end{corollary}
+\begin{proof}
+For a nonpineapple $p>0$ and $V=V_k+2ap$. By \eqref{eq:int} the
+slope from $(V_k,\phi(k))$ to $(V,Y(G))$ is at most $\tau(p)$.
+If $2n\le k^2$, then $V_k\le k(2k-3)$. Since
+$(2k-1)/(2k-3)>1+1/k$, formula \eqref{eq:pine} gives
+\[
+ \frac{\phi(k)}{V_k}
+ >\frac2k+\frac{(n-1)(k+1)}{k^2}
+ >\tau(0)>\tau(p).
+\]
+Thus $Y(G)/V<\phi(k)/V_k$, proving both assertions in this range.
+
+Suppose $2n>k^2$ and put $u=\ell-k$. For $u=1$ apply
+Theorem~\ref{th:comparison}. For $u\ge2$ it suffices to show
+$S_k(u)>\tau(p)$, which places $(V,Y(G))$ strictly below the chord
+from $P_k$ to $P_\ell$. If $p\ge u$ this follows from
+$S_k(u)>\tau(u)\ge\tau(p)$. Otherwise write $j=u-1$ and $d=p-j$.
+Since $V_{k+j}<V$, we have $ad>\binom{j+1}{2}\ge j$.
+Thus $0<d<1$. Since $ap=T-N$ is an integer, so is $ad$.
+Hence $ad\ge j+1$ and $kd=ad+2d\ge j+1+2d>p+1$.
+Using $2n>k^2$ in \eqref{eq:line} now gives
+\[
+ \tau(p)<\frac{n}{k+p}\left(1+\frac{1+d}{k}\right)
+ \le\frac{n}{k+(j-1)/2}< S_k(u).
+\]
+For the middle inequality, $(1+(1+d)/k)(k+(j-1)/2)\le
+k+1+d+j-1=k+p$ since $1+(1+d)/k<2$.
+The last inequality reduces to $(k-2)(k+u-2)>0$.
+\end{proof}
+
+\section{The extremal clique size}\label{sec:cliquesize}
+It remains to maximize \eqref{eq:pine} over the integers $2\le k\le n$.
+For $2\le k<n$ put
+\[
+ h_n(k)=(k+2)n(k^2-2n+9)-14n-5k(k+1).
+\]
+Direct subtraction gives
+\begin{equation}\label{eq:adj}
+ \K(P_{k+1})-\K(P_k)
+ =\frac{-2(k-1)h_n(k)}{k(k+1)V_kV_{k+1}} .
+\end{equation}
+This difference admits an explicit cutoff in the order of the graph.
+
+\begin{proposition}\label{prop:cutoff}
+Let
+\[
+ c_k=\frac{k^2+9}{2}-\frac{12}{k+2},\qquad t_k=\lceil c_k\rceil .
+\]
+For $2\le k<n$, the difference $\K(P_{k+1})-\K(P_k)$ is negative
+when $n<t_k$ and positive when $n\ge t_k$, with the sole exception
+of $(n,k)=(21,6)$, where it is zero.
+\end{proposition}
+\begin{proof}
+The sign can be read from the integer $D=2(k+2)(c_k-n)$, since
+\[
+ h_n(k)=\left(n-\frac5{k+2}\right)D-\frac{5(k-6)(k-1)}{k+2}.
+\]
+For $k\ge6$ and $n\ge t_k$ both terms are nonpositive, with
+equality in their sum only at $(n,k)=(21,6)$. At $n=t_k-1$ we have
+$D\ge1$ and $n\ge c_k-1\ge k^2/2>5(k-6)+1$, so $h_n(k)>0$.
+As $h_n(k)$ is concave in $n$ and $h_1(k)=k(k-1)(k-2)\ge0$,
+it is positive for every integer $1<n<t_k$.
+For $k=2,3,4,5$ the cutoffs
+$t_k$ are $4,7,11,16$, respectively. The pairs
+$(h_{t_k-1}(k),h_{t_k}(k))$ are $(12,-6)$, $(36,-18)$,
+$(60,-56)$ and $(60,-150)$. Concavity and $h_1(k)\ge0$ give
+positivity up to $t_k-1$ in these four cases as well. The negative
+difference from $t_k-1$ to $t_k$ and concavity give negativity for
+all $n\ge t_k$. The result now follows from \eqref{eq:adj}.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{th:main}]
+The structural assertion follows from Theorem~\ref{th:comparison},
+since division by $m$ gives a weighted mean of the two pineapple
+values. At order two the only graph is $K_2$.
+Since $c_{k+1}-c_k=k+1/2+12/[(k+2)(k+3)]>1$, the cutoffs $t_k$
+increase strictly. By Proposition~\ref{prop:cutoff}, the largest
+maximizing clique size at every order $n\ge2$ is therefore
+\begin{equation}\label{eq:all-orders}
+ 2+\bigl|\{j:2\le j<n,\ t_j\le n\}\bigr|.
+\end{equation}
+The pineapple values increase up to this index and decrease thereafter,
+with a single equality between consecutive values at $n=21$. At that
+order $P_6$ and $P_7$ both attain the maximum.
+
+For $k\ge23$ one has $12/(k+2)<1/2$, hence
+$t_k=\lceil(k^2+9)/2\rceil$. Also $t_{22}=246$.
+If $n\ge247$ and $d=\lfloor\sqrt{2n-9}\rfloor$, then $d\ge22$
+and $t_d\le n<t_{d+1}$. The unique optimal clique size is therefore
+$d+1$. The cutoff $247$ is sharp, since the maximizer at $n=246$ has
+clique size $23$, while the formula gives $22$.
+
+Finally write $s=\sqrt{2n}$ and $k=s+h$ at the optimum, where $h=O(1)$.
+In \eqref{eq:pine}, $V_k=2s^2+(2h-3)s+O(1)$ and
+$(n-1)(2k-1)=s^3+(h-1/2)s^2+O(s)$.
+The quotient is $s/2+1/2+O(s^{-1})$, which gives the stated
+asymptotic expansion.
+\end{proof}
+
+\section{Near-extremal graphs}\label{sec:stability}
+The leading excess $\sqrt{n/2}$ in Theorem~\ref{th:main} also
+determines how many vertices outside the clique may have degree
+greater than one. In the decomposition of Section~\ref{sec:averaging},
+write $b=N_2$ for the number of such vertices. For $k\ge3$ all
+clique vertices have degree at least two, so $k+b$ is the total number
+of nonpendant vertices. If $k=2$, then $G$ is a star and $b=0$.
+In particular $b$ is independent of the chosen construction.
+
+\begin{theorem}\label{th:stability}
+Let $(G_n)$ be a sequence of connected threshold graphs of order $n$,
+and let $k_n$ and $b_n$ denote the preceding parameters. Then
+\[
+ \K(G_n)-n\sim\sqrt{n/2}\quad\Longleftrightarrow\quad
+ k_n\sim\sqrt{2n}\quad\text{and}\quad b_n=o(\sqrt n).
+\]
+\end{theorem}
+\begin{proof}
+Write $s=\sqrt{2n}$ and suppress the index $n$. The proof of
+Corollary~\ref{cor:uniform} gives, for $2\le j\le k$,
+\[
+ \frac{f(A_j)}{k+N_j}\le\sqrt{A_j/2}\le\frac{n+A_j}{2s}.
+\]
+Since $\sum w_j\le1$ and $\sum w_jA_j=N-T/k\le n$, the weighted
+sum of the right sides is at most $s/2$. By \eqref{eq:formula},
+the weighted sum of the left sides is at least $\K(G)-n+1$.
+
+Suppose $\K(G)-n\sim s/2$. The weighted sum of the gaps is $o(s)$,
+so the gap for $j=2$ is $o(s)$ because $w_2=1/2$. The second
+inequality has gap $(\sqrt n-\sqrt{A_2})^2/(2s)$, whence $A_2\sim n$.
+Since $\sqrt{A_2/2}\sim s/2$, the ratio of the two sides in the
+first inequality tends to one. Writing $Q_2=V-2A_2$, this ratio is
+\[
+ \frac{2\sqrt{2A_2Q_2}}{2A_2+Q_2}\,
+ \frac{\sqrt{Q_2}}{k+b}.
+\]
+Both factors are at most one, so both tend to one. The first has the
+form $2x/(1+x^2)$ with $x=\sqrt{Q_2/(2A_2)}$, which forces $x\to1$.
+It follows that
+$Q_2\sim 2A_2\sim 2n$ and $k+b\sim s$. Since
+$Q_2\le k(k-1)+2(k-1)b\le(k+b)^2-b^2$, we have $b=o(s)$ and $k\sim s$.
+
+Conversely, suppose $k\sim s$ and $b=o(s)$. All but $b$ of the
+$N=n-k$ independent vertices have degree one, so $N\le T\le N+(k-2)b$
+gives $T\sim n$ and $V\sim4n$. Uniformly for $2\le j\le k$,
+$N-b\le A_j\le T$ and $N_j\le b$ give $f(A_j)\sim n$ and
+$k+N_j\sim k$. Substituting in \eqref{eq:formula} and using
+$\sum_j w_j=1-1/k$ yields $\K(G)-n\sim n/k\sim s/2$.
+\end{proof}
+
+\begin{thebibliography}{9}
+\bibitem{Breen} J. Breen, S. Kim, A. Low Fung, A. Mann, A.~A. Parfeni
+and G. Tedesco, Threshold graphs, Kemeny's constant, and related random
+walk parameters, Linear Algebra Appl. \textbf{709} (2025), 284--313.
+doi:10.1016/j.laa.2024.12.022. Preprint arXiv:2310.08552v1.
+\bibitem{CZ} H. Chen and F. Zhang, Resistance distance and the
+normalized Laplacian spectrum, Discrete Appl. Math. \textbf{155}
+(2007), 654--661.
+\bibitem{HC} T. Haritha and A.~V. Chithra, Resistance distance in
+$k$-coalescence of certain graphs, TWMS J. Appl. Eng. Math.
+\textbf{15} (2025), 1503--1519.
+\bibitem{JKS} J. Jang, S. Kim and M. Song, Kemeny's constant and
+Wiener index on trees, Linear Algebra Appl. \textbf{674} (2023),
+230--243.
+\bibitem{KS} J.~G. Kemeny and J.~L. Snell, \emph{Finite Markov
+Chains}, Springer-Verlag, New York, 1976.
+\bibitem{MP} N.~V.~R. Mahadev and U.~N. Peled, \emph{Threshold Graphs
+and Related Topics}, Annals of Discrete Mathematics, vol.~56,
+North-Holland, Amsterdam, 1995.
+\end{thebibliography}
+\end{document}
